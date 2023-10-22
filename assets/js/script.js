@@ -34,10 +34,21 @@ function showValues(){
 
     for(let i = 0; i<values.length; i++){
 
-        doList.innerHTML += `<li>${values[i]['name']}</li><button id="feito">TESTE</button><button id="remove">REMOVE</button>`;
+        doList.innerHTML += `<li>${values[i]['name']}</li><button id="btnFeito" onclick="removeItem('${values[i]['name']}')">FEITO</button>`;
     
     }
 
 }
 
 
+function removeItem(data){
+
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]");
+    let index = values.findIndex(x => x.name == data);
+    values.splice(index,1)
+    localStorage.setItem(localStorageKey,JSON.stringify(values));
+    showValues();
+
+}
+
+showValues();
